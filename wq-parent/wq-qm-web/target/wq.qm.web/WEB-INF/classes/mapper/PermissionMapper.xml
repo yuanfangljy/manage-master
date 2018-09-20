@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wq.gun.mapper.PermissionMapper">
+  <resultMap id="BaseResultMap" type="com.wq.gun.model.Permission">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="zindex" jdbcType="INTEGER" property="zindex" />
+    <result column="istype" jdbcType="INTEGER" property="istype" />
+    <result column="descpt" jdbcType="VARCHAR" property="descpt" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="page" jdbcType="VARCHAR" property="page" />
+    <result column="insert_time" jdbcType="TIMESTAMP" property="insertTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, pid, zindex, istype, descpt, code, icon, page, insert_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.wq.gun.model.PermissionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from permission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from permission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wq.gun.model.PermissionExample">
+    delete from permission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wq.gun.model.Permission">
+    insert into permission (id, name, pid, 
+      zindex, istype, descpt, 
+      code, icon, page, insert_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, 
+      #{zindex,jdbcType=INTEGER}, #{istype,jdbcType=INTEGER}, #{descpt,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{page,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wq.gun.model.Permission">
+    insert into permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="zindex != null">
+        zindex,
+      </if>
+      <if test="istype != null">
+        istype,
+      </if>
+      <if test="descpt != null">
+        descpt,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="page != null">
+        page,
+      </if>
+      <if test="insertTime != null">
+        insert_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="zindex != null">
+        #{zindex,jdbcType=INTEGER},
+      </if>
+      <if test="istype != null">
+        #{istype,jdbcType=INTEGER},
+      </if>
+      <if test="descpt != null">
+        #{descpt,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="page != null">
+        #{page,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null">
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wq.gun.model.PermissionExample" resultType="java.lang.Long">
+    select count(*) from permission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update permission
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.zindex != null">
+        zindex = #{record.zindex,jdbcType=INTEGER},
+      </if>
+      <if test="record.istype != null">
+        istype = #{record.istype,jdbcType=INTEGER},
+      </if>
+      <if test="record.descpt != null">
+        descpt = #{record.descpt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.page != null">
+        page = #{record.page,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertTime != null">
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update permission
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      pid = #{record.pid,jdbcType=INTEGER},
+      zindex = #{record.zindex,jdbcType=INTEGER},
+      istype = #{record.istype,jdbcType=INTEGER},
+      descpt = #{record.descpt,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      page = #{record.page,jdbcType=VARCHAR},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wq.gun.model.Permission">
+    update permission
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="zindex != null">
+        zindex = #{zindex,jdbcType=INTEGER},
+      </if>
+      <if test="istype != null">
+        istype = #{istype,jdbcType=INTEGER},
+      </if>
+      <if test="descpt != null">
+        descpt = #{descpt,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="page != null">
+        page = #{page,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null">
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wq.gun.model.Permission">
+    update permission
+    set name = #{name,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER},
+      zindex = #{zindex,jdbcType=INTEGER},
+      istype = #{istype,jdbcType=INTEGER},
+      descpt = #{descpt,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      page = #{page,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+
+
+  <!--=Start findAll 查找所有权限-->
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from permission
+    ORDER BY zindex
+  </select>
+  <!--=End findAll 查找所有权限-->
+
+  <!--=Start findChildPerm 查找所有子节点权限-->
+  <select id="findChildPerm" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from permission
+    where pid=#{pid}
+  </select>
+  <!--=End findChildPerm 查找所有子节点权限-->
+
+  <!--=Start findPerms 查找权限树列表-->
+  <resultMap id="findPermission" type="com.wq.common.entity.PermissionVO">
+    <id property="id" column="id"/>
+    <result property="name" column="name"/>
+    <result property="pid" column="pid"/>
+    <result property="istype" column="istype"/>
+    <result property="code" column="code"/>
+    <result property="page" column="page"/>
+
+    <collection property="children" column="pid" ofType="com.wq.gun.model.Permission">
+      <id property="id" column="id"/>
+      <result property="name" column="name"/>
+      <result property="pid" column="pid"/>
+      <result property="istype" column="istype"/>
+      <result property="code" column="code"/>
+      <result property="page" column="page"/>
+    </collection>
+  </resultMap>
+  <sql id="PermColumn" >
+    id, name,pid, zindex, istype, code, icon, page
+  </sql>
+  <!--=Start findPerms 查找权限树列表-->
+  <select id="findPerms" resultType="com.wq.common.entity.PermissionVO">
+    select
+    <include refid="PermColumn" />
+    from permission
+  </select>
+  <!--=End findPerms 查找权限树列表-->
+  <!--=Start findPermsByRole 根据角色ID查找权限树列表-->
+  <select id="findPermsByRole" resultType="com.wq.gun.model.Permission">
+    select
+    <include refid="PermColumn" />
+    from permission p
+    LEFT JOIN role_permission rp ON rp.permit_id=p.id
+    WHERE rp.role_id=#{roleId}
+  </select>
+  <!--=End findPermsByRole 根据角色ID查找权限树列表-->
+  <!--=Start getUserPerms 根据用户ID查找权限树列表-->
+  <select id="getUserPerms" resultType="com.wq.common.entity.PermissionVO">
+    select
+    p.id, p.name,p.pid pId, p.zindex, p.istype, p.code, p.icon, p.page
+    from permission p
+    LEFT JOIN role_permission rp ON rp.permit_id=p.id
+    LEFT JOIN role r ON r.id=rp.role_id
+    LEFT JOIN user_role ur ON ur.role_id=r.id
+    WHERE ur.user_id=#{userId}
+    GROUP BY p.id
+    order by p.zindex
+  </select>
+  <!--=End getUserPerms 根据用户ID查找权限树列表-->
+</mapper>

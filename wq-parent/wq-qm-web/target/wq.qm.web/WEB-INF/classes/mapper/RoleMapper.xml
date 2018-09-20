@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wq.gun.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.wq.gun.model.Role">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="descpt" jdbcType="VARCHAR" property="descpt" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="insert_uid" jdbcType="INTEGER" property="insertUid" />
+    <result column="insert_time" jdbcType="TIMESTAMP" property="insertTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, role_name, descpt, code, insert_uid, insert_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.wq.gun.model.RoleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from role
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wq.gun.model.RoleExample">
+    delete from role
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wq.gun.model.Role">
+    insert into role (id, role_name, descpt, 
+      code, insert_uid, insert_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{descpt,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{insertUid,jdbcType=INTEGER}, #{insertTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wq.gun.model.Role">
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="descpt != null">
+        descpt,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="insertUid != null">
+        insert_uid,
+      </if>
+      <if test="insertTime != null">
+        insert_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="descpt != null">
+        #{descpt,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="insertUid != null">
+        #{insertUid,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null">
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wq.gun.model.RoleExample" resultType="java.lang.Long">
+    select count(*) from role
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update role
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.roleName != null">
+        role_name = #{record.roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descpt != null">
+        descpt = #{record.descpt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertUid != null">
+        insert_uid = #{record.insertUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.insertTime != null">
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update role
+    set id = #{record.id,jdbcType=INTEGER},
+      role_name = #{record.roleName,jdbcType=VARCHAR},
+      descpt = #{record.descpt,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      insert_uid = #{record.insertUid,jdbcType=INTEGER},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wq.gun.model.Role">
+    update role
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="descpt != null">
+        descpt = #{descpt,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="insertUid != null">
+        insert_uid = #{insertUid,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null">
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wq.gun.model.Role">
+    update role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      descpt = #{descpt,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      insert_uid = #{insertUid,jdbcType=INTEGER},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <!--=Start findList 分页查询角色列表-->
+  <select id="findList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from role
+  </select>
+  <!--=End findList 分页查询角色列表-->
+
+  <!--=Start findRoleAndPerms 查询角色列表-->
+  <resultMap id="rolePerms" type="com.wq.common.entity.RoleVO" >
+    <id column="id" property="id" />
+    <result column="role_name" property="roleName"/>
+    <result column="code" property="code"/>
+    <result column="descpt" property="descpt"/>
+    <result column="insert_uid" property="insertUid"/>
+    <result column="insert_time" property="insertTime"/>
+    <collection property="rolePerms" ofType="com.wq.gun.model.RolePermissionKey">
+      <result  column="role_id" property="roleId"/>
+      <result column="permit_id" property="permitId"/>
+    </collection>
+  </resultMap>
+
+  <select id="findRoleAndPerms" resultMap="rolePerms">
+    select
+    r.*,rp.role_id,rp.permit_id
+    from role r
+    INNER JOIN role_permission rp ON r.id=rp.role_id
+    WHERE r.id=#{id}
+  </select>
+  <!--=End findRoleAndPerms 查询角色列表-->
+
+  <!--=Start getRoleByUserId 根据用户id查询角色数据-->
+  <select id="getRoleByUserId" resultType="com.wq.gun.model.Role">
+    select
+    ur.role_id id,r.role_name,r.code
+    from user_role ur
+    INNER JOIN role r ON r.id=ur.role_id
+    WHERE ur.user_id=#{userId}
+  </select>
+  <!--=End getRoleByUserId 根据用户id查询角色数据-->
+
+  <!--=Start getRoles 查询角色列表-->
+  <select id="getRoles" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from role
+  </select>
+  <!--=End getRoles 查询角色列表-->
+</mapper>

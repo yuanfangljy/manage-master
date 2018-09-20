@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/wq-parent.iml" filepath="$PROJECT_DIR$/wq-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wq-qm-common/wq-qm-common.iml" filepath="$PROJECT_DIR$/wq-qm-common/wq-qm-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wq-qm-web/wq-qm-web.iml" filepath="$PROJECT_DIR$/wq-qm-web/wq-qm-web.iml" />
+    </modules>
+  </component>
+</project>
